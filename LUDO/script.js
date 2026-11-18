@@ -1,4 +1,80 @@
 
+let diceNumber = 0;
+let selectedToken = null;
+let canSelectToken = false;
+let redPath = [];
+
+let redTokens = document.querySelectorAll(".red-token");
+redTokens.forEach(function (token) {
+    token.dataset.entered = "false";
+    token.dataset.position = "-1";
+});
+
+redTokens.forEach(function (token) {
+    token.addEventListener("click", SelectRedToken);
+});
+
+function SelectRedToken(event) {
+
+    let token = event.currentTarget;
+
+    if (!canSelectToken) {
+        return;
+    }
+
+    if (token.dataset.entered === "true") {
+        return;
+    }
+
+    if (diceNumber !== 6) {
+        return;
+    }
+
+    // Store selected token
+    selectedToken = token;
+
+    // Get token's original position
+    let oldPosition = selectedToken.getBoundingClientRect();
+
+    // Get starting cell
+    let startCell = document.getElementById("redStartCell");
+
+    // Move token to starting cell
+    startCell.appendChild(selectedToken);
+
+    // Get token's new position
+    let newPosition = selectedToken.getBoundingClientRect();
+
+    // Calculate movement distance
+    let moveX = oldPosition.left - newPosition.left;
+    let moveY = oldPosition.top - newPosition.top;
+
+    // Animate token movement
+    let animation = selectedToken.animate(
+        [
+            {
+                transform: `translate(${moveX}px, ${moveY}px)`
+            },
+            {
+                transform: "translate(0px, 0px)"
+            }
+        ],
+        {
+            duration: 1000,
+            easing: "ease-in-out"
+        }
+    );
+
+    // Update token information
+    selectedToken.dataset.entered = "true";
+    selectedToken.dataset.position = "0";
+
+    // Reset selection
+    selectedToken.classList.remove("selected-token");
+    canSelectToken = false;
+
+    console.log("Token entered the board!");
+}
 function RollDice() {
 
     let dice = document.getElementById("dice");
@@ -14,8 +90,8 @@ function RollDice() {
     // Generate number after animation
     setTimeout(function () {
 
-        let number = Math.floor(Math.random() * 6) + 1;
-
+        diceNumber = Math.floor(Math.random() * 6) + 1;
+        canSelectToken = (diceNumber === 6);
         let dots = document.querySelectorAll(".dot");
 
         let dicePatterns = {
@@ -29,7 +105,7 @@ function RollDice() {
 
         dots.forEach(function (dot, index) {
 
-            if (dicePatterns[number].includes(index + 1)) {
+            if (dicePatterns[diceNumber].includes(index + 1)) {
                 dot.classList.add("active");
             }
             else {
@@ -38,7 +114,7 @@ function RollDice() {
 
         });
 
-        console.log("Dice Number:", number);
+        console.log("Dice Number:", diceNumber);
 
         // Stop animation
         dice.classList.remove("rolling");

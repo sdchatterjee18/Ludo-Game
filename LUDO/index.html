@@ -15,18 +15,22 @@
                         <div class="player-home">
                             <div class="token-section-top">
                                 <div class="ludo-token-holder red-token-holder">
-                                    <div class="ludo-token red-token"></div>
+                                    <div class="ludo-token red-token" id="redToken1" onclick="SelectRedToken(this)">
+                                    </div>
                                 </div>
                                 <div class="ludo-token-holder red-token-holder">
-                                    <div class="ludo-token red-token"></div>
+                                    <div class="ludo-token red-token" id="redToken2" onclick="SelectRedToken(this)">
+                                    </div>
                                 </div>
                             </div>
                             <div class="token-section-bottom">
                                 <div class="ludo-token-holder red-token-holder">
-                                    <div class="ludo-token red-token"></div>
+                                    <div class="ludo-token red-token" id="redToken3" onclick="SelectRedToken(this)">
+                                    </div>
                                 </div>
                                 <div class="ludo-token-holder red-token-holder">
-                                    <div class="ludo-token red-token"></div>
+                                    <div class="ludo-token red-token" id="redToken4" onclick="SelectRedToken(this)">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +88,7 @@
                 <div class="middle-section">
                     <div class="left-path hor-path">
                         <div class="path-cell"></div>
-                        <div class="path-cell"></div>
+                        <div class="path-cell" id="redStartCell"></div>
                         <div class="path-cell"></div>
                         <div class="path-cell"></div>
                         <div class="path-cell"></div>
@@ -214,9 +218,9 @@
 
             </div>
         </div>
-
+        <!-- onclick="RollDice() -->
         <div class="dice" id="dice" onclick="RollDice()">
-            <div class="dice-dots" id="diceDots">
+            <div class=" dice-dots" id="diceDots">
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
@@ -228,7 +232,7 @@
                 <span class="dot"></span>
             </div>
         </div>
-        <script src="script.js"></script>
+        <script src="script1.js"></script>
 </body>
 
 </html>
