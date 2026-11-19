@@ -82,6 +82,31 @@ let redTokenPositions = {
     redToken3: -1,
     redToken4: -1
 };
+// Check whether any Red token can make a valid move with the current dice roll
+function hasValidMoves() {
+    if (diceNumber === 0) {
+        return false;
+    }
+
+    for (let tokenId in redTokenPositions) {
+        let position = redTokenPositions[tokenId];
+
+        // Token in home can only move out on a 6
+        if (position === -1) {
+            if (diceNumber === 6) {
+                return true;
+            }
+        }
+        // Token on board can move if target position is within the path
+        else {
+            if (position + diceNumber < redPath.length) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
 let selectedToken = null;
 console.log("Total Red Path Cells:", redPath.length);
 console.log("Starting Cell:", redPath[0]);
@@ -208,7 +233,7 @@ function RollDice() {
     let dice = document.getElementById("dice");
 
     // Prevent clicking while animation is running
-    if (dice.classList.contains("rolling") || isTokenMoving) {
+    if (dice.classList.contains("rolling") || isTokenMoving || hasValidMoves()) {
         return;
     }
 
