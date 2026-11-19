@@ -339,6 +339,8 @@ body {
         inset 0 -4px 5px rgba(0, 0, 0, 0.25),
         inset 0 3px 5px rgba(255, 255, 255, 0.5);
     cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 
 .red-token {
@@ -399,6 +401,10 @@ body {
 .star {
     height: 25px;
     width: 25px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     clip-path: polygon(50% 0%,
             61% 35%,
             98% 35%,
@@ -414,7 +420,10 @@ body {
 .arrow {
     width: 8px;
     height: 17px;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     margin: 0;
     transform-origin: center;
 }
@@ -429,17 +438,17 @@ body {
     border-right: 11px solid transparent;
 }
 
-.arrow-up {
-    transform: rotate(180deg);
+.arrow-top {
+    transform: translate(-50%, -50%) rotate(180deg);
     background-color: yellow;
 }
 
-.arrow-up::after {
+.arrow-top::after {
     border-top: 10px solid yellow;
 }
 
 .arrow-down {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
     background-color: blue;
 }
 
@@ -448,7 +457,7 @@ body {
 }
 
 .arrow-left {
-    transform: rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg);
     background-color: green;
 }
 
@@ -457,7 +466,7 @@ body {
 }
 
 .arrow-right {
-    transform: rotate(-90deg);
+    transform: translate(-50%, -50%) rotate(-90deg);
     background-color: red;
 }
 
@@ -465,13 +474,11 @@ body {
     border-top: 10px solid red;
 }
 
-
 .center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .red-token.selected-token {
     outline: 3px solid orange;
@@ -508,4 +515,5 @@ body {
 .star,
 .arrow {
     pointer-events: none;
+    z-index: 1;
 }
