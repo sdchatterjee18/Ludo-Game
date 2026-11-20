@@ -71,7 +71,8 @@ let redPath = [
     leftCells[11]
 
 ];
-
+// Load dice rolling audio
+const diceAudio = new Audio("images/dcie-roll.mp3");
 let diceNumber = 0;
 let canSelectToken = false;
 let isTokenMoving = false;
@@ -110,10 +111,6 @@ function hasValidMoves() {
 let selectedToken = null;
 console.log("Total Red Path Cells:", redPath.length);
 console.log("Starting Cell:", redPath[0]);
-
-
-
-
 async function SelectRedToken(token) {
 
     // 1. Prevent clicking any token while movement is in progress
@@ -195,7 +192,6 @@ async function SelectRedToken(token) {
     console.log("New Position:", redTokenPositions[tokenId]);
 }
 
-
 function MoveToken(token, targetCell) {
 
     // Get current position
@@ -236,7 +232,8 @@ function RollDice() {
     if (dice.classList.contains("rolling") || isTokenMoving || hasValidMoves()) {
         return;
     }
-
+    diceAudio.currentTime = 0;
+    diceAudio.play().catch(err => console.log("Audio play blocked or missing:", err));
     // Start animation
     dice.classList.add("rolling");
 
